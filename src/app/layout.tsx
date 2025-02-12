@@ -9,7 +9,7 @@ import type React from "react" // Added import for React
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Domain Scanner",
+  title: "Domain Haul",
   description: "Comprehensive domain analysis tool",
     generator: 'v0.dev'
 }

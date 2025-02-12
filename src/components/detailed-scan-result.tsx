@@ -87,7 +87,7 @@ export default function DetailedScanResult({ data }) {
         </CardHeader>
         <CardContent>
           <dl className="grid grid-cols-2 gap-4">
-            {Object.entries(data.whois_info).map(([key, value]) => (
+            {Object.entries(data?.whois_info || {}).map(([key, value]) => (
               <div key={key}>
                 <dt className="font-semibold">
                   {key.replace(/_/g, " ").charAt(0).toUpperCase() + key.replace(/_/g, " ").slice(1)}
