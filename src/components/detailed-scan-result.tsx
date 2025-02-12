@@ -1,7 +1,23 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-export default function DetailedScanResult({ data }) {
+interface DetailedScanData {
+  dns_records: Record<string, string[]>;
+  http_headers: Record<string, string>;
+  ssl_info: {
+    issuer: [string, [string, string]][];
+    notBefore: string;
+    notAfter: string;
+    serialNumber: string;
+  };
+  whois_info?: Record<string, string | string[]>;
+}
+
+interface DetailedScanResultProps {
+  data: DetailedScanData;
+}
+
+export default function DetailedScanResult({ data }:DetailedScanResultProps) {
   return (
     <div className="space-y-6">
       <Card>
