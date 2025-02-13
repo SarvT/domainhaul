@@ -1,6 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function DomainInfo({ info }) {
+interface DomainInfoProps {
+  info: {
+    registrar: string
+    creationDate: string
+    expirationDate: string
+    nameServers: string[]
+  }
+}
+
+export default function DomainInfo({ info }: DomainInfoProps) {
   return (
     <Card>
       <CardHeader>
@@ -29,4 +38,3 @@ export default function DomainInfo({ info }) {
     </Card>
   )
 }
-

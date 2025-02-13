@@ -1,21 +1,10 @@
-// import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-// export default function WhoisInfo({ info }) {
-//   return (
-//     <Card>
-//       <CardHeader>
-//         <CardTitle>WHOIS Information</CardTitle>
-//       </CardHeader>
-//       <CardContent>
-//         <pre className="whitespace-pre-wrap text-sm">{JSON.stringify(info, null, 2)}</pre>
-//       </CardContent>
-//     </Card>
-//   )
-// }
+interface WhoisInfoProps {
+  info?: Record<string, string | string[] | null>
+}
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-export default function WhoisInfo({ info }) {
+export default function WhoisInfo({ info }: WhoisInfoProps) {
   if (!info) {
     return (
       <Card>
@@ -24,7 +13,7 @@ export default function WhoisInfo({ info }) {
         </CardHeader>
         <CardContent>No data available</CardContent>
       </Card>
-    );
+    )
   }
 
   return (
@@ -57,5 +46,5 @@ export default function WhoisInfo({ info }) {
         </dl>
       </CardContent>
     </Card>
-  );
+  )
 }

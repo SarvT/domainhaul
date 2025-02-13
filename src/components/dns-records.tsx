@@ -1,7 +1,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-export default function DnsRecords({ records }) {
+// Define the type for a single DNS record entry
+interface DnsRecordEntry {
+  name: string
+  value: string
+  ttl: number
+}
+
+// Define the type for records, which is an object with string keys and array values
+interface DnsRecordsProps {
+  records: Record<string, DnsRecordEntry[]>
+}
+
+export default function DnsRecords({ records }: DnsRecordsProps) {
   return (
     <Card>
       <CardHeader>
@@ -26,7 +38,7 @@ export default function DnsRecords({ records }) {
                   <TableCell>{entry.value}</TableCell>
                   <TableCell>{entry.ttl}</TableCell>
                 </TableRow>
-              )),
+              ))
             )}
           </TableBody>
         </Table>
@@ -34,4 +46,3 @@ export default function DnsRecords({ records }) {
     </Card>
   )
 }
-

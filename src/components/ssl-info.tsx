@@ -1,6 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function SslInfo({ info }) {
+interface SslInfoProps {
+  info: {
+    issuer: string
+    validFrom: string
+    validTo: string
+    subject: string
+  }
+}
+
+export default function SslInfo({ info }: SslInfoProps) {
   return (
     <Card>
       <CardHeader>
@@ -29,4 +38,3 @@ export default function SslInfo({ info }) {
     </Card>
   )
 }
-
