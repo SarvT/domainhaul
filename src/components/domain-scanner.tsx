@@ -13,6 +13,28 @@ import SslInfo from "./ssl-info"
 import IntegrationPanel from "./integration-panel"
 import DetailedScanResult from "./detailed-scan-result"
 
+
+interface DetailedScanData {
+  dns_records: Record<string, DnsRecordEntry[]>
+  http_headers: Record<string, string>;
+  ssl_info: SslInfo
+  whois_info?: Record<string, string | string[]>;
+}
+
+interface SslInfo{
+  issuer: string
+  validFrom: string
+  validTo: string
+  subject: string
+}
+
+interface DnsRecordEntry {
+  name: string
+  value: string
+  ttl: number
+}
+
+
 export default function DomainScanner() {
   const [domain, setDomain] = useState("")
   const { data, isLoading, error, scanDomain } = useDomainInfo()
@@ -22,6 +44,30 @@ export default function DomainScanner() {
       scanDomain(domain)
     }
   }
+
+  const transformedData: DetailedScanData = data
+  ? {
+      dns_records: Object.fromEntries(
+        Object.entries(data.dnsRecords || {}).map(([key, records]) => [
+          key,
+          records.map((record: DnsRecordEntry) => ({
+            name: data.domain,
+            value: record.value, // Ensure we're accessing the correct property
+            ttl: record.ttl || 3600, // Use TTL from record or default to 3600
+          })),
+        ])
+      ) as Record<string, DnsRecordEntry[]>,
+      http_headers: data.http_headers || {},
+      ssl_info: data.ssl_info || { issuer: "", validFrom: "", validTo: "", subject: "" },
+      whois_info: typeof data.whoisInfo === "object" ? { ...data.whoisInfo } : {},
+    }
+  : {
+      dns_records: {},
+      http_headers: {},
+      ssl_info: { issuer: "", validFrom: "", validTo: "", subject: "" },
+      whois_info: {},
+    };
+
 
   return (
     <div className="space-y-8">
@@ -79,7 +125,7 @@ export default function DomainScanner() {
                 <IntegrationPanel domain={data.domain} />
               </TabsContent>
               <TabsContent value="detailed">
-                <DetailedScanResult data={data} />
+                <DetailedScanResult data={transformedData} />
               </TabsContent>
             </Tabs>
           </CardContent>

@@ -11,7 +11,22 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Domain Haul",
   description: "Comprehensive domain analysis tool",
-    generator: 'v0.dev'
+  icons: {
+    icon: [
+      {
+        media: '(prefers-color-scheme: light)',
+        // url: '/images/icon-light.png',
+        url: '/images/icon.svg',
+        href: '/images/icon.svg',
+      },
+      {
+        media: '(prefers-color-scheme: dark)',
+        url: '/images/icon.svg',
+        href: '/images/icon.svg',
+        // href: '/images/icon-dark.png',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
