@@ -38,7 +38,7 @@ npm run dev
 ```
 
 
-(Backend)[https://github.com/SarvT/DomainScanner]
+[Backend](https://github.com/SarvT/DomainScanner)
 ### Setup Backend
 ```sh
 cd backend
